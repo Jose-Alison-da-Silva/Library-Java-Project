@@ -138,4 +138,39 @@ public class BookDAO {
 			
 		}
 	}
+	
+	public void deleteByID(int id) throws Exception{
+		
+		String sql = "DELETE FROM books WHERE id_book = ?";
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		try {
+			connection = DBConnection.createConnectionToMySQL();
+			
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, id);
+			
+			statement.execute();
+			
+			System.out.println("Livro deletado com sucesso");
+			
+			
+		} catch (Exception e) {
+			Serializer.saveString("C:\\Users\\aliso\\Desktop\\Erros.txt", e.getMessage());
+		} finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (Exception e) {
+				Serializer.saveString("C:\\Users\\aliso\\Desktop\\Erros.txt", e.getMessage());
+			}
+		}
+	}
 }

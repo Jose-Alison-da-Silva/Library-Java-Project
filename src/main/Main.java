@@ -19,10 +19,12 @@ public class Main {
 		
 		for (Book books : bookDAO.bookList()) {
 			System.out.println(books.toString());
-		}*/
+		}
 		
 		Book book2 = new Book(12, "A Arte da Guerra", "Sun Tzu", "Psicologia", "2023", 12);
 		bookDAO.updateBook(book2);
+		
+		bookDAO.deleteByID(14);*/
 
 	}
 
