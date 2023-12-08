@@ -1,0 +1,39 @@
+CREATE SCHEMA library;
+USE library;
+CREATE TABLE books(
+	id_book INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    author VARCHAR(50) NOT NULL,
+    gener VARCHAR(50) NOT NULL,
+    release_year INT NOT NULL,
+    exemplars INT,
+    PRIMARY KEY(id_book)
+);
+
+CREATE TABLE client(
+	id_client INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    unreturned_books INT,
+	PRIMARY KEY(id_client)
+);
+
+CREATE TABLE librarian(
+	id_librarian INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    cpf VARCHAR(15) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    wage DOUBLE,
+    PRIMARY KEY(id_librarian),
+    UNIQUE(cpf)
+);
+
+CREATE TABLE loan(
+	id_loan INT NOT NULL AUTO_INCREMENT,
+    id_client INT NOT NULL,
+    id_book INT NOT NULL,
+    status VARCHAR(15),
+    PRIMARY KEY(id_loan),
+    FOREIGN KEY(id_client) REFERENCES client(id_client),
+    FOREIGN KEY(id_book) REFERENCES books(id_book)
+);
