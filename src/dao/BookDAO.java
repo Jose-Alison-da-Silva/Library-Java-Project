@@ -99,4 +99,43 @@ public class BookDAO {
 		
 		return books;
 	}
+	
+	public void updateBook(Book book) throws Exception{
+		String sql = "UPDATE library.books SET name = ?, author = ?, gener = ?, release_year = ?, exemplars = ? where id_book = ?";
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		try {
+			connection = DBConnection.createConnectionToMySQL();
+			
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, book.getName());
+			statement.setString(2, book.getAuthor());
+			statement.setString(3, book.getGener());
+			statement.setString(4, book.getReleaseYear());
+			statement.setInt(5, book.getExemplars());
+			statement.setInt(6, book.getId());
+			
+			statement.execute();
+			
+			System.out.println("Livro atualizado com sucesso");
+			
+		} catch (Exception e) {
+			Serializer.saveString("C:\\Users\\aliso\\Desktop\\Erros.txt", e.getMessage());
+		} finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (Exception e) {
+				Serializer.saveString("C:\\Users\\aliso\\Desktop\\Erros.txt", e.getMessage());
+			}
+			
+		}
+	}
 }
