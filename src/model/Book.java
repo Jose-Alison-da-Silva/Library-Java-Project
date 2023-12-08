@@ -53,4 +53,18 @@ public class Book {
 		this.exemplars = exemplars;
 	}
 	
+	public Book(int id, String name, String author, String gener, String releaseYear, int exemplars) {
+		this.id = id;
+		this.name = name;
+		this.author = author;
+		this.gener = gener;
+		this.releaseYear = releaseYear;
+		this.exemplars = exemplars;
+	}
+	@Override
+	public String toString() {
+		String information = String.format("Nome: %s\tAutor: %s\tGênero: %s\tAno de lançamento: %s\tExemplares: %d\n", name, author, gener, releaseYear, exemplars);
+		return information;
+	}
+	
 }
